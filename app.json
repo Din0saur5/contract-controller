@@ -31,6 +31,12 @@
     ],
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "ab52c4cf-18d7-44da-94cd-fbe60cbec568"
+      }
+    },
+    "owner": "dinosaur5"
   }
 }
