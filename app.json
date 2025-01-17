@@ -1,5 +1,13 @@
 {
   "expo": {
+    "doctor": {
+      "reactNativeDirectoryCheck": {
+        "exclude": [
+          "react-redux"
+        ]
+      }
+    },
+    "newArchEnabled": true,
     "name": "contract-controller",
     "slug": "contract-controller",
     "version": "1.0.0",
@@ -29,7 +37,15 @@
       "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
-      "expo-router"
+      "expo-router",
+      "expo-font",
+      [
+        "expo-video",
+        {
+          "supportsBackgroundPlayback": true,
+          "supportsPictureInPicture": true
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true

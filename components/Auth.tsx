@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { Alert, StyleSheet, View, AppState } from 'react-native'
 import { supabase } from '../supabase/supabase'
 import { Button, Input } from '@rneui/themed'
+import LoadingModal from './UHLoadScreen'
+import { Asset } from "expo-asset";
 
 // Tells Supabase Auth to continuously refresh the session automatically if
 // the app is in the foreground. When this is added, you will continue to receive
@@ -46,37 +48,58 @@ export default function Auth() {
         setLoading(false)
     }
 
+    const [isModalVisible, setModalVisible] = useState(false);
+
+
+
     return (
         <View style={styles.container}>
-            <View style={[styles.verticallySpaced, styles.mt20]}>
-                <Input
-                    label="Email"
-                    leftIcon={{ type: 'font-awesome', name: 'envelope' }}
-                    onChangeText={(text) => setEmail(text)}
-                    value={email}
-                    placeholder="email@address.com"
-                    autoCapitalize={'none'}
+            <View style={styles.verticallySpaced}>
+                <Button
+                    title="Show Loading Modal"
+                    onPress={() => setModalVisible(true)}
                 />
             </View>
-            <View style={styles.verticallySpaced}>
-                <Input
-                    label="Password"
-                    leftIcon={{ type: 'font-awesome', name: 'lock' }}
-                    onChangeText={(text) => setPassword(text)}
-                    value={password}
-                    secureTextEntry={true}
-                    placeholder="Password"
-                    autoCapitalize={'none'}
-                />
-            </View>
-            <View style={[styles.verticallySpaced, styles.mt20]}>
-                <Button title="Sign in" disabled={loading} onPress={() => signInWithEmail()} />
-            </View>
-            <View style={styles.verticallySpaced}>
-                <Button title="Sign up" disabled={loading} onPress={() => signUpWithEmail()} />
-            </View>
+
+            <LoadingModal
+                visible={isModalVisible}
+                estimatedTime={30000} // 25 seconds
+                headerText="Please wait while we create your next lesson   "
+                setVisible={setModalVisible}
+
+            />
+
         </View>
     )
+    {/* //     <View style={[styles.verticallySpaced, styles.mt20]}>
+        //         <Input
+        //             label="Email"
+        //             leftIcon={{ type: 'font-awesome', name: 'envelope' }}
+        //             onChangeText={(text) => setEmail(text)}
+        //             value={email}
+        //             placeholder="email@address.com"
+        //             autoCapitalize={'none'}
+        //         />
+        //     </View>
+        //     <View style={styles.verticallySpaced}>
+        //         <Input
+        //             label="Password"
+        //             leftIcon={{ type: 'font-awesome', name: 'lock' }}
+        //             onChangeText={(text) => setPassword(text)}
+        //             value={password}
+        //             secureTextEntry={true}
+        //             placeholder="Password"
+        //             autoCapitalize={'none'}
+        //         />
+        //     </View>
+        //     <View style={[styles.verticallySpaced, styles.mt20]}>
+        //         <Button title="Sign in" disabled={loading} onPress={() => signInWithEmail()} />
+        //     </View>
+        //     <View style={styles.verticallySpaced}>
+        //         <Button title="Sign up" disabled={loading} onPress={() => signUpWithEmail()} />
+        //     </View> */}
+
+
 }
 
 const styles = StyleSheet.create({
